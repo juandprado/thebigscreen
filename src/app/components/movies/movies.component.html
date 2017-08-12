@@ -1,0 +1,14 @@
+<h2>My Movies</h2>
+<ul class="movies">
+  <li *ngFor="let movie of movies"
+    [class.selected]="movie === selectedMovie"
+    (click)="onSelect(movie)">
+    <span class="badge">{{movie.id}}</span> {{movie.original_title}}
+  </li>
+</ul>
+<div *ngIf="selectedMovie">
+  <h2>
+    {{selectedMovie.original_title | uppercase}} is my movie
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>

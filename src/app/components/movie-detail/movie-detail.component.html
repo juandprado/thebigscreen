@@ -1,0 +1,28 @@
+<div *ngIf="movie">
+
+  <h2>{{movie.title}} ({{movie.release_date | date: 'yyyy'}})</h2>
+
+  <div><img src="{{'http://image.tmdb.org/t/p/w185'+movie.poster_path}}"/></div>
+
+  <div><label>Id: </label>{{movie.id}}</div>
+  <div><label>Vote average: </label>{{movie.vote_average}}</div>
+  <div><label>Release Date: </label>{{movie.release_date}}</div>
+  <div><label>Genres: </label><span *ngFor="let genre of movie.genres; let isLast=last">{{genre.name}}{{isLast ? '' : ', '}}</span></div>
+  <div><label>Overview: </label>{{movie.overview}}</div>
+  <div><label>Budget: </label>{{movie.budget | currency:'USD':true:'4.0-2'}}</div>
+  <div><label>Box office: </label>{{movie.revenue | currency:'USD':true:'4.0-2'}}</div>
+
+  <div><label>Trailer: </label>{{movie.videos.results[0].name}}</div>
+  <div><iframe width="560" height="315" [src]="'http://www.youtube.com/embed/'+movie.videos.results[0].key | safe" frameborder="0" allowfullscreen></iframe></div>
+
+  <div><label>Main Cast: </label><span *ngFor="let person of cast; let isLast=last">
+    <a [routerLink]="['/detail-people', person.id]">{{person.name}}</a> ({{person.character}}){{isLast ? '' : ', '}}</span></div>
+
+  <div><label>Main Crew: </label><span *ngFor="let person of crew; let isLast=last">
+    <a [routerLink]="['/detail-people', person.id]">{{person.name}}</a> ({{person.job}}){{isLast ? '' : ', '}}</span></div>
+
+  <div><label>Similar Movies: </label><span *ngFor="let mov of similar; let isLast=last">
+    <a [routerLink]="['/detail', mov.id]">{{mov.title}}</a>{{isLast ? '' : ', '}}</span></div>
+
+  <button (click)="goBack()">Back</button>
+</div>

@@ -1,0 +1,13 @@
+<div *ngIf="people">
+  <h2>{{people.name}}</h2>
+  <div><img src="{{'http://image.tmdb.org/t/p/w185'+people.profile_path}}"/></div>
+  <div><label>Id: </label>{{people.id}}</div>
+  <div><label>Bio: </label>{{people.biography}}</div>
+  <div><label>Gender: </label><span *ngIf="people.gender===1">Female</span>
+  <span *ngIf="people.gender===2">Male</span></div>
+  <div><label>Birthday: </label>{{people.birthday}}</div>
+  <div><label>Place of birth: </label>{{people.place_of_birth}}</div>
+  <div><label>As cast: </label><a *ngFor="let part of peopleCast; let isLast=last" [routerLink]="['/detail', part.id]">{{part.title}}{{isLast ? '' : ', '}}</a></div>
+  <div><label>As crew: </label><a *ngFor="let part of peopleCrew; let isLast=last" [routerLink]="['/detail', part.id]">{{part.title}}{{isLast ? '' : ', '}}</a></div>
+  <button (click)="goBack()">Back</button>
+</div>
