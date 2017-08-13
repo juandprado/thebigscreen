@@ -16,6 +16,10 @@ import { SafePipe } from './pipes/safe.pipe';
 import { MovieService } from './services/movie.service';
 import { PeopleService } from './services/people.service';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MaterialModule} from '@angular/material';
+import 'hammerjs';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +34,9 @@ import { PeopleService } from './services/people.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [ MovieService, PeopleService ],
   bootstrap: [AppComponent]

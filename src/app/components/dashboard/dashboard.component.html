@@ -1,53 +1,28 @@
-<div class="container" style="background-color: #DCDCDC">
-  <!-- Content here -->
+<div class="container">
+<!-- <div class="container" style="background-color: #DCDCDC"> -->
 <br>
-<h3>Trending movies</h3>
+<h1>Trending movies</h1>
 <br>
-<div class="row">
-  <div *ngFor="let movie of movies" class="col-md-3" style="display: flex;">
-    <div class="card">
+<md-grid-list cols="4" rowHeight="7:6">
+  <md-grid-tile *ngFor="let movie of movies" (click)="gotoDetail(movie)">
+    <img src="{{'http://image.tmdb.org/t/p/w300'+movie.poster_path}}" alt="No image found">
+    <md-grid-tile-footer>
+      <h2><b>{{movie.title}}</b></h2>
+    </md-grid-tile-footer>
+  </md-grid-tile>
+</md-grid-list>
+<br>
 
-      <div class="card-block">
-        <img class="img-fluid" src="{{'http://image.tmdb.org/t/p/w185'+movie.poster_path}}" alt="Card image cap">
-        <h4 class="card-title">{{movie.title}}</h4>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Watch More</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<h3>Trending movies</h3>
-<div class="grid grid-pad">
-  <a *ngFor="let movie of movies"  [routerLink]="['/detail', movie.id]"  class="col-1-4">
-    <div class="module movie">
-      <h4>{{movie.title}}</h4>
-    </div>
-  </a>
-</div>
-<h3>Trending people</h3>
-<div class="grid grid-pad">
-  <a *ngFor="let person of people"  [routerLink]="['/detail-people', person.id]"  class="col-1-4">
-    <div class="module movie">
-      <h4>{{person.name}}</h4>
-    </div>
-  </a>
-</div>
-<h3>In Theaters</h3>
-<div class="grid grid-pad">
-  <a *ngFor="let movie of movieTheaters"  [routerLink]="['/detail', movie.id]"  class="col-1-4">
-    <div class="module movie">
-      <h4>{{movie.title}}</h4>
-    </div>
-  </a>
-</div>
-<h3>Top-rated movies</h3>
-<div class="grid grid-pad">
-  <a *ngFor="let movie of movieTop"  [routerLink]="['/detail', movie.id]"  class="col-1-4">
-    <div class="module movie">
-      <h4>{{movie.title}}</h4>
-    </div>
-  </a>
-</div>
+<h1>Popular people</h1>
+<br>
+<md-grid-list cols="4" rowHeight="7:6">
+  <md-grid-tile *ngFor="let person of people" (click)="gotoDetail(person)">
+    <img src="{{'http://image.tmdb.org/t/p/w300'+person.profile_path}}" alt="No image found">
+    <md-grid-tile-footer>
+      <h3><b>{{person.name}}</b></h3>
+    </md-grid-tile-footer>
+  </md-grid-tile>
+</md-grid-list>
+<br>
 <movie-search></movie-search>
 </div>

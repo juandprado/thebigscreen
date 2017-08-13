@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router }            from '@angular/router';
 
 import { Movie } from '../../classes/movie'
 import { MovieService } from '../../services/movie.service'
@@ -13,21 +14,26 @@ import { PeopleService } from '../../services/people.service';
 })
 export class DashboardComponent implements OnInit {
   movies: Movie[] = [];
-  movieTheaters: Movie[]= []
-  movieTop: Movie[]= []
   people: People[] = [];
 
-  constructor(private movieService: MovieService, private peopleService: PeopleService) { }
+  constructor(private movieService: MovieService, private peopleService: PeopleService,
+  private router: Router) { }
 
   ngOnInit(): void {
     this.movieService.getMovies()
-      .then(movies => this.movies = movies.slice(0, 7));
-    this.movieService.getMoviesTheaters()
-      .then(movieTheaters => this.movieTheaters = movieTheaters.slice(0, 4));
-    this.movieService.getMoviesTop()
-      .then(movieTop => this.movieTop = movieTop.slice(0, 4));
+      .then(movies => this.movies = movies.slice(0, 8));
     this.peopleService.getPeople()
-      .then(people => this.people = people.slice(0, 4));
+      .then(people => this.people = people.slice(0, 8));
+  }
+
+  gotoDetail(movie: any): void {
+    if(movie.title){
+      let link = ['/detail', movie.id];
+      this.router.navigate(link);
+    } else if (movie.name) {
+        let link = ['/detail-people', movie.id];
+        this.router.navigate(link);
+    }
   }
 
 }

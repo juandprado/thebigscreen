@@ -1,14 +1,36 @@
-<h2>My Movies</h2>
-<ul class="movies">
-  <li *ngFor="let movie of movies"
-    [class.selected]="movie === selectedMovie"
-    (click)="onSelect(movie)">
-    <span class="badge">{{movie.id}}</span> {{movie.original_title}}
-  </li>
-</ul>
-<div *ngIf="selectedMovie">
-  <h2>
-    {{selectedMovie.original_title | uppercase}} is my movie
-  </h2>
-  <button (click)="gotoDetail()">View Details</button>
+<div class="container">
+  <br>
+  <h1>Trending movies</h1>
+  <br>
+  <md-grid-list cols="4" rowHeight="7:6">
+    <md-grid-tile *ngFor="let movie of movies" (click)="gotoDetail(movie)">
+      <img src="{{'http://image.tmdb.org/t/p/w300'+movie.poster_path}}" alt="No image found">
+      <md-grid-tile-footer>
+        <h2><b>{{movie.title}}</b></h2>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+  </md-grid-list>
+  <br>
+  <h1>In theaters</h1>
+  <br>
+  <md-grid-list cols="4" rowHeight="7:6">
+    <md-grid-tile *ngFor="let movie of movieTheaters" (click)="gotoDetail(movie)">
+      <img src="{{'http://image.tmdb.org/t/p/w300'+movie.poster_path}}" alt="No image found">
+      <md-grid-tile-footer>
+        <h2><b>{{movie.title}}</b></h2>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+  </md-grid-list>
+  <br>
+  <h1>Top movies</h1>
+  <br>
+  <md-grid-list cols="4" rowHeight="7:6">
+    <md-grid-tile *ngFor="let movie of movieTop; let i = index" (click)="gotoDetail(movie)">
+      <img src="{{'http://image.tmdb.org/t/p/w300'+movie.poster_path}}" alt="No image found">
+      <md-grid-tile-footer>
+        <h2><b>{{i+1}}- {{movie.title}}</b></h2>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+  </md-grid-list>
+  <br>
 </div>

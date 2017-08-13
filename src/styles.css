@@ -1,1 +1,6 @@
+@import '~@angular/material/prebuilt-themes/purple-green.css';
 /* You can add global styles to this file, and also import other style files */
+
+md-grid-tile {
+  cursor: pointer;
+}

@@ -13,18 +13,21 @@ export class MoviesComponent implements OnInit {
 
   constructor(private movieService: MovieService, private router: Router) { };
    movies: Movie[];
-   selectedMovie: Movie;
-   onSelect(movie: Movie): void {
-     this.selectedMovie = movie;
-   };
+   movieTheaters: Movie[]= []
+   movieTop: Movie[]= [];
    getMovies(): void {
-     this.movieService.getMovies().then(movies => this.movies = movies);
+     this.movieService.getMovies().then(movies => this.movies = movies.slice(0, 8));
+     this.movieService.getMoviesTheaters()
+       .then(movieTheaters => this.movieTheaters = movieTheaters.slice(0, 8));
+     this.movieService.getMoviesTop()
+       .then(movieTop => this.movieTop = movieTop.slice(0, 8));
    }
    ngOnInit(): void {
      this.getMovies();
    }
-   gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedMovie.id]);
-  }
+   gotoDetail(movie: any): void {
+       let link = ['/detail', movie.id];
+       this.router.navigate(link);
+   }
 
 }
