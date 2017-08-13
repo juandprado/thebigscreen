@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { Movie } from '../../classes/movie'
-import { MovieService } from '../../services/movie.service'
+import { Movie } from '../../classes/movie';
+import { MovieService } from '../../services/movie.service';
 import 'rxjs/add/operator/switchMap';
+
+import { Router }            from '@angular/router';
 
 
 @Component({
@@ -16,7 +18,8 @@ export class MovieDetailComponent implements OnInit {
   constructor (
     private movieService: MovieService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
   @Input() movie: Movie;
   @Input() cast: any[];
@@ -38,6 +41,15 @@ export class MovieDetailComponent implements OnInit {
   }
   goBack(): void {
     this.location.back();
+  }
+  gotoDetail(movie: any): void {
+    if(movie.title){
+      let link = ['/detail', movie.id];
+      this.router.navigate(link);
+    } else if (movie.name) {
+        let link = ['/detail-people', movie.id];
+        this.router.navigate(link);
+    }
   }
 
 }
