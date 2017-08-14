@@ -15,10 +15,12 @@ import { SafePipe } from './pipes/safe.pipe';
 
 import { MovieService } from './services/movie.service';
 import { PeopleService } from './services/people.service';
+import { MovieSearchService } from './services/movie-search.service'
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from '@angular/material';
 import 'hammerjs';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import 'hammerjs';
     MovieSearchComponent,
     MoviesComponent,
     PeopleDetailComponent,
-    SafePipe
+    SafePipe,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,7 @@ import 'hammerjs';
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [ MovieService, PeopleService ],
+  providers: [ MovieService, PeopleService, MovieSearchService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

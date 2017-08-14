@@ -1,7 +1,7 @@
 <div class="container">
 <br>
 
-<div class="row">
+<div *ngIf="movie" class="row">
   <div class="col-sm-4">
     <img class="img-fluid" src="{{'http://image.tmdb.org/t/p/w500'+movie.poster_path}}"/>
     <div><label>Release Date: </label>{{movie.release_date}}</div>
@@ -51,14 +51,20 @@
       <br>
     </div>
 
+    <div><label><h4>Similar Movies</h4></label>
+      <br>
+      <md-grid-list cols="4" rowHeight="1:1">
+        <md-grid-tile *ngFor="let mov of similar" (click)="gotoDetail(mov)">
+          <img *ngIf="mov.poster_path" src="{{'http://image.tmdb.org/t/p/w185'+mov.poster_path}}" alt="No image found">
+          <img *ngIf="!mov.poster_path" src="https://www.themoviedb.org/assets/static_cache/c9dbe2292fb5eea61788571fbd96fa67/images/v4/logos/208x226-stacked-blue.png" alt="No image found">
+          <md-grid-tile-footer>
+            <h3><b>{{mov.title}}</b></h3>
+          </md-grid-tile-footer>
+        </md-grid-tile>
+      </md-grid-list>
+      <br>
+    </div>
   </div>
 </div>
 
-</div>
-
-<div *ngIf="movie">
-  <div><label>Similar Movies: </label><span *ngFor="let mov of similar; let isLast=last">
-    <a [routerLink]="['/detail', mov.id]">{{mov.title}}</a>{{isLast ? '' : ', '}}</span></div>
-
-  <button (click)="goBack()">Back</button>
 </div>

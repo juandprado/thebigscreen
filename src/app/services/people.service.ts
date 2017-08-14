@@ -10,13 +10,13 @@ import { Movie } from '../classes/movie'
 export class PeopleService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private peopleUrl = 'http://api.themoviedb.org/3'; //URL to web api
+  private peopleUrl = 'http://gentle-spire-70902.herokuapp.com'; //URL to web api
   private apiKey = 'api_key=802cd9bec58e75474a66bfa717fd1106';
 
   constructor(private http: Http) { }
 
   getPeople(): Promise<People[]> {
-    return this.http.get(this.peopleUrl+'/person/popular?'+this.apiKey)
+    return this.http.get(this.peopleUrl+'/people-trending')
       .toPromise()
       .then(response => response.json().results as People[])
       .catch(this.handleError);
@@ -28,7 +28,7 @@ export class PeopleService {
   }
 
   getPerson(id: number): Promise<People> {
-    const url = `${this.peopleUrl}/person/${id}?${this.apiKey}`;
+    const url = `${this.peopleUrl}/people/${id}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json() as People)
@@ -36,7 +36,7 @@ export class PeopleService {
   }
 
   getParticipationCast(id: number): Promise<Movie[]> {
-    const url = `${this.peopleUrl}/person/${id}/movie_credits?${this.apiKey}`;
+    const url = `${this.peopleUrl}/people-cast/${id}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json().cast as Movie[])
@@ -44,7 +44,7 @@ export class PeopleService {
   }
 
   getParticipationCrew(id: number): Promise<Movie[]> {
-    const url = `${this.peopleUrl}/person/${id}/movie_credits?${this.apiKey}`;
+    const url = `${this.peopleUrl}/people-cast/${id}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json().crew as Movie[])

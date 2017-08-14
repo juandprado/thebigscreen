@@ -1,13 +1,49 @@
-<div *ngIf="people">
-  <h2>{{people.name}}</h2>
-  <div><img src="{{'http://image.tmdb.org/t/p/w185'+people.profile_path}}"/></div>
-  <div><label>Id: </label>{{people.id}}</div>
-  <div><label>Bio: </label>{{people.biography}}</div>
-  <div><label>Gender: </label><span *ngIf="people.gender===1">Female</span>
-  <span *ngIf="people.gender===2">Male</span></div>
-  <div><label>Birthday: </label>{{people.birthday}}</div>
-  <div><label>Place of birth: </label>{{people.place_of_birth}}</div>
-  <div><label>As cast: </label><a *ngFor="let part of peopleCast; let isLast=last" [routerLink]="['/detail', part.id]">{{part.title}}{{isLast ? '' : ', '}}</a></div>
-  <div><label>As crew: </label><a *ngFor="let part of peopleCrew; let isLast=last" [routerLink]="['/detail', part.id]">{{part.title}}{{isLast ? '' : ', '}}</a></div>
-  <button (click)="goBack()">Back</button>
+<div class="container">
+<br>
+
+  <div *ngIf="people" class="row">
+
+    <div class="col-sm-4">
+      <img class="img-fluid" src="{{'http://image.tmdb.org/t/p/w300'+people.profile_path}}"/>
+      <div><label>Birthday: </label>{{people.birthday}}</div>
+      <div><label>Place of birth: </label>{{people.place_of_birth}}</div>
+      <div><label>Gender: </label><span *ngIf="people.gender===1">Female</span>
+      <span *ngIf="people.gender===2">Male</span></div>
+    </div>
+
+    <div class="col-sm-8">
+      <h2>{{people.name}}</h2>
+      <br>
+      <p>{{people.biography}}</p>
+
+      <div><label><h4>As cast</h4></label>
+        <br>
+        <md-grid-list cols="4" rowHeight="1:1">
+          <md-grid-tile *ngFor="let part of peopleCast" (click)="gotoDetail(part)">
+            <img *ngIf="part.poster_path" src="{{'http://image.tmdb.org/t/p/w185'+part.poster_path}}" alt="No image found">
+            <img *ngIf="!part.poster_path" src="https://www.themoviedb.org/assets/static_cache/c9dbe2292fb5eea61788571fbd96fa67/images/v4/logos/208x226-stacked-blue.png" alt="No image found">
+            <md-grid-tile-footer>
+              <h3><b>{{part.title}} ({{part.release_date  | date: 'yyyy'}})</b></h3>
+            </md-grid-tile-footer>
+          </md-grid-tile>
+        </md-grid-list>
+        <br>
+      </div>
+      <br>
+      <div><label><h4>As crew</h4></label>
+        <br>
+        <md-grid-list cols="4" rowHeight="1:1">
+          <md-grid-tile *ngFor="let part of peopleCrew" (click)="gotoDetail(part)">
+            <img *ngIf="part.poster_path" src="{{'http://image.tmdb.org/t/p/w185'+part.poster_path}}" alt="No image found">
+            <img *ngIf="!part.poster_path" src="https://www.themoviedb.org/assets/static_cache/c9dbe2292fb5eea61788571fbd96fa67/images/v4/logos/208x226-stacked-blue.png" alt="No image found">
+            <md-grid-tile-footer>
+              <h3><b>{{part.title}}</b></h3>
+            </md-grid-tile-footer>
+          </md-grid-tile>
+        </md-grid-list>
+        <br>
+      </div>
+    </div>
+  </div>
+
 </div>

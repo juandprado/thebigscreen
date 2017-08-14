@@ -1,54 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { People } from '../../classes/people';
+import { Movie } from '../../classes/movie';
+import 'rxjs/add/operator/switchMap';
+
 import { Router }            from '@angular/router';
 
-import { Observable }        from 'rxjs/Observable';
-import { Subject }           from 'rxjs/Subject';
-
-// Observable class extensions
-import 'rxjs/add/observable/of';
-
-// Observable operators
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-
 import { MovieSearchService } from '../../services/movie-search.service';
-import { Movie } from '../../classes/movie';
 
 @Component({
   selector: 'movie-search',
   templateUrl: './movie-search.component.html',
-  styleUrls: ['./movie-search.component.css'],
-  providers: [MovieSearchService]
+  styleUrls: ['./movie-search.component.css']
 })
 export class MovieSearchComponent implements OnInit {
 
-  movies: Observable<any[]>;
-  private searchTerms = new Subject<string>();
-
   constructor(
     private movieSearchService: MovieSearchService,
+    private route: ActivatedRoute,
+    private location: Location,
     private router: Router) {}
 
-  // Push a search term into the observable stream.
-  search(term: string): void {
-    this.searchTerms.next(term);
-  }
 
+  @Input() results: any[];
   ngOnInit(): void {
-    this.movies = this.searchTerms
-      .debounceTime(300)        // wait 300ms after each keystroke before considering the term
-      .distinctUntilChanged()   // ignore if next search term is same as previous
-      .switchMap(term => term   // switch to new observable each time the term changes
-        // return the http search observable
-        ? this.movieSearchService.search(term)
-        // or the observable of empty movies if there was no search term
-        : Observable.of<any[]>([]))
-      .catch(error => {
-        // TODO: add real error handling
-        console.log(error);
-        return Observable.of<any[]>([]);
-      });
+    this.route.params
+    .switchMap((params: Params) => this.movieSearchService.search(params['query']))
+    .subscribe(results => this.results = results.slice(0, 12));
+    console.log(this.results);
   }
 
   gotoDetail(movie: any): void {

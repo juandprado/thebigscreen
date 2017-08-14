@@ -7,29 +7,28 @@ import { Movie } from '../classes/movie';
 
 @Injectable()
 export class MovieService {
-
   private headers = new Headers({'Content-Type': 'application/json'});
-  private moviesUrl = 'http://api.themoviedb.org/3'; //URL to web api
+  private moviesUrl = 'http://gentle-spire-70902.herokuapp.com'; //URL to web api
   private apiKey = 'api_key=802cd9bec58e75474a66bfa717fd1106';
 
   constructor(private http: Http) { }
 
   getMovies(): Promise<Movie[]> {
-    return this.http.get(this.moviesUrl+'/discover/movie?'+this.apiKey)
+    return this.http.get(this.moviesUrl+'/movies-trending')
       .toPromise()
       .then(response => response.json().results as Movie[])
       .catch(this.handleError);
   };
 
   getMoviesTheaters(): Promise<Movie[]> {
-    return this.http.get(this.moviesUrl+'/movie/now_playing?'+this.apiKey)
+    return this.http.get(this.moviesUrl+'/movies-theaters')
       .toPromise()
       .then(response => response.json().results as Movie[])
       .catch(this.handleError);
   };
 
   getMoviesTop(): Promise<Movie[]> {
-    return this.http.get(this.moviesUrl+'/movie/top_rated?'+this.apiKey)
+    return this.http.get(this.moviesUrl+'/movies-top')
       .toPromise()
       .then(response => response.json().results as Movie[])
       .catch(this.handleError);
@@ -41,7 +40,7 @@ export class MovieService {
   }
 
   getMovie(id: number): Promise<Movie> {
-    const url = `${this.moviesUrl}/movie/${id}?${this.apiKey}&append_to_response=videos`;
+    const url = `${this.moviesUrl}/movies/${id}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json() as Movie)
@@ -49,7 +48,7 @@ export class MovieService {
   }
 
   getSimilar(id: number): Promise<Movie[]> {
-    const url = `${this.moviesUrl}/movie/${id}/similar?${this.apiKey}`;
+    const url = `${this.moviesUrl}/movies-similar/${id}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json().results as Movie[])
@@ -57,7 +56,7 @@ export class MovieService {
   }
 
   getCast(id: number): Promise<any[]> {
-    const url = `${this.moviesUrl}/movie/${id}/casts?${this.apiKey}`;
+    const url = `${this.moviesUrl}/movies-cast/${id}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json().cast)
@@ -65,7 +64,7 @@ export class MovieService {
   }
 
   getCrew(id: number): Promise<any[]> {
-    const url = `${this.moviesUrl}/movie/${id}/casts?${this.apiKey}`;
+    const url = `${this.moviesUrl}/movies-cast/${id}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json().crew)

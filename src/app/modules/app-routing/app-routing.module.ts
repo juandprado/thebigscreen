@@ -7,6 +7,7 @@ import { MoviesComponent} from '../../components/movies/movies.component';
 import { DashboardComponent} from '../../components/dashboard/dashboard.component';
 import { MovieDetailComponent } from '../../components/movie-detail/movie-detail.component';
 import { PeopleDetailComponent } from '../../components/people-detail/people-detail.component';
+import { MovieSearchComponent} from '../../components/movie-search/movie-search.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'detail/:id', component: MovieDetailComponent },
   { path: 'movies',     component: MoviesComponent },
   { path: 'detail-people/:id', component: PeopleDetailComponent },
+  { path: 'movie-search/:query', component: MovieSearchComponent },
 ];
 
 @NgModule({
