@@ -10,7 +10,7 @@ import { Movie } from '../classes/movie'
 export class PeopleService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private peopleUrl = 'http://gentle-spire-70902.herokuapp.com'; //URL to web api
+  private peopleUrl = 'https://gentle-spire-70902.herokuapp.com'; //URL to web api
   private apiKey = 'api_key=802cd9bec58e75474a66bfa717fd1106';
 
   constructor(private http: Http) { }

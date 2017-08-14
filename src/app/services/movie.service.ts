@@ -8,7 +8,7 @@ import { Movie } from '../classes/movie';
 @Injectable()
 export class MovieService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private moviesUrl = 'http://gentle-spire-70902.herokuapp.com'; //URL to web api
+  private moviesUrl = 'https://gentle-spire-70902.herokuapp.com'; //URL to web api
   private apiKey = 'api_key=802cd9bec58e75474a66bfa717fd1106';
 
   constructor(private http: Http) { }
