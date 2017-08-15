@@ -4,10 +4,11 @@
   <div *ngIf="people" class="row">
 
     <div class="col-sm-4">
-      <img class="img-fluid" src="{{'http://image.tmdb.org/t/p/w300'+people.profile_path}}"/>
-      <div><label>Birthday: </label>{{people.birthday}}</div>
-      <div><label>Place of birth: </label>{{people.place_of_birth}}</div>
-      <div><label>Gender: </label><span *ngIf="people.gender===1">Female</span>
+      <img *ngIf='people.profile_path' class="img-fluid" src="{{'https://image.tmdb.org/t/p/w300'+people.profile_path}}"/>
+      <img *ngIf='!people.profile_path' class="img-fluid" src="https://www.themoviedb.org/assets/static_cache/afc8955ea7e6aabcf0c9d8254346b928/images/v4/logos/312x276-primary-blue.png"/>
+      <div *ngIf="people.birthday"><label>Birthday: </label>{{people.birthday}}</div>
+      <div *ngIf="people.place_of_birth"><label>Place of birth: </label>{{people.place_of_birth}}</div>
+      <div *ngIf="people.gender"><label>Gender: </label><span *ngIf="people.gender===1">Female</span>
       <span *ngIf="people.gender===2">Male</span></div>
     </div>
 
@@ -16,11 +17,11 @@
       <br>
       <p>{{people.biography}}</p>
 
-      <div><label><h4>As cast</h4></label>
+      <div *ngIf="peopleCast"><label *ngIf="peopleCast[0]"><h4>As cast</h4></label>
         <br>
         <md-grid-list cols="4" rowHeight="1:1">
           <md-grid-tile *ngFor="let part of peopleCast" (click)="gotoDetail(part)">
-            <img *ngIf="part.poster_path" src="{{'http://image.tmdb.org/t/p/w185'+part.poster_path}}" alt="No image found">
+            <img *ngIf="part.poster_path" src="{{'https://image.tmdb.org/t/p/w185'+part.poster_path}}" alt="No image found">
             <img *ngIf="!part.poster_path" src="https://www.themoviedb.org/assets/static_cache/c9dbe2292fb5eea61788571fbd96fa67/images/v4/logos/208x226-stacked-blue.png" alt="No image found">
             <md-grid-tile-footer>
               <h3><b>{{part.title}} ({{part.release_date  | date: 'yyyy'}})</b></h3>
@@ -30,11 +31,11 @@
         <br>
       </div>
       <br>
-      <div><label><h4>As crew</h4></label>
+      <div *ngIf="peopleCrew"><label *ngIf="peopleCrew[0]"><h4>As crew</h4></label>
         <br>
         <md-grid-list cols="4" rowHeight="1:1">
           <md-grid-tile *ngFor="let part of peopleCrew" (click)="gotoDetail(part)">
-            <img *ngIf="part.poster_path" src="{{'http://image.tmdb.org/t/p/w185'+part.poster_path}}" alt="No image found">
+            <img *ngIf="part.poster_path" src="{{'https://image.tmdb.org/t/p/w185'+part.poster_path}}" alt="No image found">
             <img *ngIf="!part.poster_path" src="https://www.themoviedb.org/assets/static_cache/c9dbe2292fb5eea61788571fbd96fa67/images/v4/logos/208x226-stacked-blue.png" alt="No image found">
             <md-grid-tile-footer>
               <h3><b>{{part.title}}</b></h3>

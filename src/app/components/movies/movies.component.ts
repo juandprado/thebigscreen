@@ -20,7 +20,7 @@ export class MoviesComponent implements OnInit {
      this.movieService.getMoviesTheaters()
        .then(movieTheaters => this.movieTheaters = movieTheaters.slice(0, 8));
      this.movieService.getMoviesTop()
-       .then(movieTop => this.movieTop = movieTop.slice(0, 8));
+       .then(movieTop => this.movieTop = movieTop.slice(0, 20));
    }
    ngOnInit(): void {
      this.getMovies();

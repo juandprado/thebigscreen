@@ -27,3 +27,10 @@ button:disabled {
   color: #ccc;
   cursor: auto;
 }
+.right{
+    float:right;
+}
+
+.left{
+    float:left;
+}

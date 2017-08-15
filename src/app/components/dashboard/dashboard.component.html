@@ -5,7 +5,7 @@
 <br>
 <md-grid-list cols="4" rowHeight="7:6">
   <md-grid-tile *ngFor="let movie of movies" (click)="gotoDetail(movie)">
-    <img src="{{'http://image.tmdb.org/t/p/w300'+movie.poster_path}}" alt="No image found">
+    <img src="{{'https://image.tmdb.org/t/p/w300'+movie.poster_path}}" alt="No image found">
     <md-grid-tile-footer>
       <h2><b>{{movie.title}}</b></h2>
     </md-grid-tile-footer>
@@ -17,7 +17,7 @@
 <br>
 <md-grid-list cols="4" rowHeight="7:6">
   <md-grid-tile *ngFor="let person of people" (click)="gotoDetail(person)">
-    <img src="{{'http://image.tmdb.org/t/p/w300'+person.profile_path}}" alt="No image found">
+    <img src="{{'https://image.tmdb.org/t/p/w300'+person.profile_path}}" alt="No image found">
     <md-grid-tile-footer>
       <h3><b>{{person.name}}</b></h3>
     </md-grid-tile-footer>

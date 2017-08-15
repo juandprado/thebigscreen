@@ -5,8 +5,8 @@
 <br>
 <md-grid-list cols="4" rowHeight="7:6">
   <md-grid-tile *ngFor="let res of results" (click)="gotoDetail(res)">
-    <img *ngIf='res.poster_path' src="{{'http://image.tmdb.org/t/p/w300'+res.poster_path}}" alt="No image found">
-    <img *ngIf='res.profile_path' src="{{'http://image.tmdb.org/t/p/w300'+res.profile_path}}" alt="No image found">
+    <img *ngIf='res.poster_path' src="{{'https://image.tmdb.org/t/p/w300'+res.poster_path}}" alt="No image found">
+    <img *ngIf='res.profile_path' src="{{'https://image.tmdb.org/t/p/w300'+res.profile_path}}" alt="No image found">
     <img *ngIf="!res.poster_path && !res.profile_path" src="https://www.themoviedb.org/assets/static_cache/c9dbe2292fb5eea61788571fbd96fa67/images/v4/logos/208x226-stacked-blue.png" alt="No image found">
     <md-grid-tile-footer>
       <h2 *ngIf='res.title'><b>{{res.title}}</b></h2>
